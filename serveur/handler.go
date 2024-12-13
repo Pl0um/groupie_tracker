@@ -3,6 +3,7 @@ package engine
 import (
 	"html/template"
 	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
 func (jeu *Engine) Handler(w http.ResponseWriter, r *http.Request) {
@@ -16,4 +17,10 @@ func (jeu *Engine) Handler(w http.ResponseWriter, r *http.Request) {
 
 	// J'execute le template avec les données
 	tmpl.Execute(w, data)
+}
+func (jeu *Engine) Request(w http.ResponseWriter, r *http.Request, html string) {
+	boutonHome := r.Form.Get("bouton_home")
+	if boutonHome == "groupie" {
+		jeu.getAPIData(*gin.Context)
+	}
 }
