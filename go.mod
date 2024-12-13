@@ -1,4 +1,4 @@
-module groupie/groupie
+module engine
 
 go 1.22.2
 

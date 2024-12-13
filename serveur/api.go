@@ -6,9 +6,10 @@ import (
     "fmt"
     "io/ioutil"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
-func fetchData(url string) (interface{}, error) {
+func(jeu *Engine) fetchData(url string) (interface{}, error) {
     resp, err := http.Get(url)
     if err != nil {
         return nil, err
@@ -29,31 +30,31 @@ func fetchData(url string) (interface{}, error) {
     return result, nil
 }
 
-func getAPIData(c *gin.Context) {
+func (jeu *Engine) getAPIData(c *gin.Context) {
     artistsURL := "https://groupietrackers.herokuapp.com/api/artists"
     locationsURL := "https://groupietrackers.herokuapp.com/api/locations"
     datesURL := "https://groupietrackers.herokuapp.com/api/dates"
     relationURL := "https://groupietrackers.herokuapp.com/api/relation"
 
-    artists, err := fetchData(artistsURL)
+    artists, err := jeu.fetchData(artistsURL)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching artists: %v", err)})
         return
     }
 
-    locations, err := fetchData(locationsURL)
+    locations, err := jeu.fetchData(locationsURL)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching locations: %v", err)})
         return
     }
 
-    dates, err := fetchData(datesURL)
+    dates, err := jeu.fetchData(datesURL)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching dates: %v", err)})
         return
     }
 
-    relation, err := fetchData(relationURL)
+    relation, err := jeu.fetchData(relationURL)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching relation: %v", err)})
         return
