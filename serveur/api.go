@@ -1,12 +1,11 @@
-package main
+package engine
+
 
 import (
     "encoding/json"
     "fmt"
     "io/ioutil"
-    "net/http"
-
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 func fetchData(url string) (interface{}, error) {
@@ -60,7 +59,7 @@ func getAPIData(c *gin.Context) {
         return
     }
 
-    response := APIResponse{
+    response := Engine{
         Artists:   artists,
         Locations: locations,
         Dates:     dates,
@@ -68,16 +67,4 @@ func getAPIData(c *gin.Context) {
     }
 
     c.JSON(http.StatusOK, response)
-}
-
-func main() {
-    router := gin.Default()
-    router.GET("groupietrackers.herokuapp.com/api", getAPIData)
-
-	router.NoRoute(func(c *gin.Context) {
-        c.JSON(http.StatusNotFound, gin.H{"error": "Route not found"})
-    })
-
-	fmt.Println("Server starting on http://localhost:8080")
-    router.Run("localhost:8080")
 }
