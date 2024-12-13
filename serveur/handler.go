@@ -7,7 +7,7 @@ import (
 
 func (jeu *Engine) Handler(w http.ResponseWriter, r *http.Request) {
 	// J'utilise la librairie tmpl pour créer un template qui va chercher mon fichier index.html
-	tmpl := template.Must(template.ParseFiles("front/template/start.html"))
+	tmpl := template.Must(template.ParseFiles("front/template/Home.html"))
 
 	// Définir les données à passer au template
 	data := map[string]interface{}{

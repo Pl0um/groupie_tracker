@@ -2,22 +2,24 @@ package engine
 
 import (
     "fmt"
-    "github.com/gin-gonic/gin"
     "net/http"
+    
 )
 
 func Run(jeu *Engine) {
-    fmt.Println("Running server on port 8080")
-    
-    http.HandleFunc("/", jeu.Handler)
-    router := gin.Default()
-    router.GET("/api", func(c *gin.Context) {
-        // Add your API handling logic here
-        c.JSON(http.StatusOK, gin.H{"message": "API endpoint"})
-    })
+    http.HandleFunc("/", homeHandler)
+    http.HandleFunc("/about", aboutHandler)
 
-    router.NoRoute(func(c *gin.Context) {
-        c.JSON(http.StatusNotFound, gin.H{"error": "Route not found"})
-    })
-    router.Run("localhost:8080")
+    fmt.Println("Server is listening on port http://localhost:3002")
+    if err := http.ListenAndServe(":3002", nil); err != nil {
+        fmt.Println("Error starting server:", err)
+    }
+}
+
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Welcome to the home page!")
+}
+
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "This is the about page.")
 }
