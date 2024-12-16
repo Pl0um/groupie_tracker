@@ -7,7 +7,7 @@ import (
 
 func (jeu *Engine) Difficult(w http.ResponseWriter, r *http.Request) {
 	// J'utilise la librairie tmpl pour créer un template qui va chercher mon fichier difficult.html
-	tmpl := template.Must(template.ParseFiles("/home/mael/go/groupie_tracker/template/Home.html"))
+	tmpl := template.Must(template.ParseFiles("template/Home.html"))
 	tmpl.Execute(w, nil)
 
 		// Je redirige vers la page de jeu facile
