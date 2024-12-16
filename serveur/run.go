@@ -3,7 +3,7 @@ package engine
 import (
     "fmt"
     "net/http"
-    
+    "html/template"
 )
 
 func Run(jeu *Engine) {
@@ -17,7 +17,9 @@ func Run(jeu *Engine) {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Welcome to the home page!")
+    tmpl := template.Must(template.ParseFiles("/home/mael/go/groupie_tracker/template/Home.html"))
+    tmpl.Execute(w, nil)
+
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {

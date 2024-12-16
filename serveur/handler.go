@@ -3,12 +3,11 @@ package engine
 import (
 	"html/template"
 	"net/http"
-	"github.com/gin-gonic/gin"
 )
 
 func (jeu *Engine) Handler(w http.ResponseWriter, r *http.Request) {
 	// J'utilise la librairie tmpl pour créer un template qui va chercher mon fichier index.html
-	tmpl := template.Must(template.ParseFiles("front/template/Home.html"))
+	tmpl := template.Must(template.ParseFiles("/home/mael/go/groupie_tracker/template/Home.html"))
 
 	// Définir les données à passer au template
 	data := map[string]interface{}{
@@ -21,6 +20,6 @@ func (jeu *Engine) Handler(w http.ResponseWriter, r *http.Request) {
 func (jeu *Engine) Request(w http.ResponseWriter, r *http.Request, html string) {
 	boutonHome := r.Form.Get("bouton_home")
 	if boutonHome == "groupie" {
-		jeu.getAPIData(*gin.Context)
+		jeu.Handler(w, r)
 	}
 }
