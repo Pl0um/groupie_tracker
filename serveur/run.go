@@ -11,8 +11,8 @@ func Run(jeu *Engine) {
     http.HandleFunc("/groupie", groupieHandler)
     http.HandleFunc("/api/artists", serveArtists)
 
-    fmt.Println("Server is listening on port http://localhost:3002")
-    if err := http.ListenAndServe(":3002", nil); err != nil {
+    fmt.Println("Server is listening on port http://localhost:2025")
+    if err := http.ListenAndServe(":2025", nil); err != nil {
         fmt.Println("Error starting server:", err)
     }
 }
