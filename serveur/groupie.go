@@ -1,10 +1,14 @@
 package engine
 
 import (
-    "html/template"
-    "net/http"
+	"html/template"
+	"net/http"
 )
-func groupieHandler(w http.ResponseWriter, r *http.Request) {
-    tmpl := template.Must(template.ParseFiles("template/groupie.html"))
-    tmpl.Execute(w, nil)
+
+func (base *Engine) groupieHandler(w http.ResponseWriter, r *http.Request) {
+    // J'utilise la librairie tmpl pour créer un template qui va chercher mon fichier Groupie.html
+	tmpl := template.Must(template.ParseFiles("template/Groupie.html"))
+
+    // J'exectute le template avec les données
+	tmpl.Execute(w, nil)
 }

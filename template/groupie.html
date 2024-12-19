@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groupie Tracker</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/Groupie.css">
+    <title>Groupie Trackers</title>
 </head>
 <body>
     <h1>Groupie Tracker</h1>
     <div id="artists"></div>
-
     <script>
-        axios.get('/api/artists')
-            .then(function (response) {
+        fetch('/api/artists')
+            .then(response => response.json())
+            .then(data => {
                 const artistsDiv = document.getElementById('artists');
-                response.data.forEach(artist => {
+                data.forEach(artist => {
                     const artistElement = document.createElement('div');
-                    artistElement.innerHTML = `
-                        <h2>${artist.name}</h2>
-                        <img src="${artist.image}" alt="${artist.name}" width="200">
-                        <p>Members: ${artist.members.join(', ')}</p>
-                        <p>Creation Date: ${artist.creationDate}</p>
-                        <p>First Album: ${artist.firstAlbum}</p>
-                    `;
+                    artistElement.textContent = artist.name;
                     artistsDiv.appendChild(artistElement);
                 });
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            .catch(error => console.error('Error fetching artists:', error));
     </script>
 </body>
 </html>

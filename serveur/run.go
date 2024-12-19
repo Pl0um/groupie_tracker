@@ -1,29 +1,22 @@
 package engine
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 )
 
-func Run(jeu *Engine) {
-    http.HandleFunc("/", jeu.Handler)
-    http.HandleFunc("/groupie", groupieHandler)
-    http.HandleFunc("/api/artists", serveArtists)
+func Run(base *Engine) {
+    // Je définis plusieur routes
+    http.HandleFunc("/", base.Handler) // Une fois lancer on arrive sur la racine ou on appelle la fonction Handler
+    http.HandleFunc("/Home", base.Home)
+    http.HandleFunc("/Groupie", base.groupieHandler)
+    http.HandleFunc("/Credit", base.creditHandler)
 
-    fmt.Println("Server is listening on port http://localhost:2025")
-    if err := http.ListenAndServe(":2025", nil); err != nil {
-        fmt.Println("Error starting server:", err)
+	css := http.FileServer(http.Dir("css"))
+	http.Handle("/css/", http.StripPrefix("/css/", css))
+    
+    fmt.Println("Le serveur c'est lancer ici : http://localhost:2025") // J'affiche un message pour dire que le serveur c'est lancer
+    if err := http.ListenAndServe(":2025", nil); err != nil { // Je lance le serveur sur le port 2025
+        fmt.Println("Désoler le serveur ne c'est pas lancer :", err) // Si il y a une erreur je l'affiche
     }
-}
-
-func serveArtists(w http.ResponseWriter, r *http.Request) {
-    artists, err := GetArtists()
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
-
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(artists)
 }

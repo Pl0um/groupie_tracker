@@ -41,6 +41,7 @@ func GetApi2(url string) []byte {
     return responseData
 }
 
+// retApi returns the ID of the artist or member matching the given form
 func retApi(form string) int {
     res := GetApi("https://groupietrackers.herokuapp.com/api/artists")
     var artists []struct {
@@ -83,6 +84,5 @@ func GetArtists() ([]Artist, error) {
     if err != nil {
         return nil, err
     }
-
     return artists, nil
 }

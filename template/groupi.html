@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/Groupie.css" >
+    <title>Groupie Tracker</title>
+    <script src="https://groupietrackers.herokuapp.com/api/artists"></script>
+</head>
+<body>
+    <h1>Groupie Tracker</h1>
+    <div id="artists"></div>
+
+    <script>
+        herokuapp.get('/api/artists')
+            .then(function (response) {
+                const artistsDiv = document.getElementById('artists');
+                response.data.forEach(artist => {
+                    const artistElement = document.createElement('div');
+                    artistElement.innerHTML = `
+                        <h2>${artist.name}</h2>
+                        <img src="${artist.image}" alt="${artist.name}" width="200">
+                        <p>Members: ${artist.members.join(', ')}</p>
+                        <p>Creation Date: ${artist.creationDate}</p>
+                        <p>First Album: ${artist.firstAlbum}</p>
+                    `;
+                    artistsDiv.appendChild(artistElement);
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    </script>
+</body>
+</html>
