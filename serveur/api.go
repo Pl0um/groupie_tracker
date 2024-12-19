@@ -1,71 +1,88 @@
 package engine
 
-
 import (
     "encoding/json"
     "fmt"
     "io/ioutil"
-	"github.com/gin-gonic/gin"
-	"net/http"
+    "log"
+    "net/http"
+    "os"
 )
 
-func(jeu *Engine) fetchData(url string) (interface{}, error) {
-    resp, err := http.Get(url)
+func GetApi(url string) []byte {
+    artists, err := http.NewRequest("GET", url, nil)
     if err != nil {
-        return nil, err
-    }
-    defer resp.Body.Close()
-
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        return nil, err
+        fmt.Print(err.Error())
     }
 
-    var result interface{}
-    err = json.Unmarshal(body, &result)
+    res, err := http.DefaultClient.Do(artists)
     if err != nil {
-        return nil, err
+        log.Fatal(err)
     }
 
-    return result, nil
+    body, err := ioutil.ReadAll(res.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+    return body
 }
 
-func (jeu *Engine) getAPIData(c *gin.Context) {
-    artistsURL := "https://groupietrackers.herokuapp.com/api/artists"
-    locationsURL := "https://groupietrackers.herokuapp.com/api/locations"
-    datesURL := "https://groupietrackers.herokuapp.com/api/dates"
-    relationURL := "https://groupietrackers.herokuapp.com/api/relation"
-
-    artists, err := jeu.fetchData(artistsURL)
+func GetApi2(url string) []byte {
+    response, err := http.Get(url)
     if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching artists: %v", err)})
-        return
+        fmt.Print(err.Error())
+        os.Exit(1)
     }
 
-    locations, err := jeu.fetchData(locationsURL)
+    responseData, err := ioutil.ReadAll(response.Body)
     if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching locations: %v", err)})
-        return
+        log.Fatal(err)
     }
+    return responseData
+}
 
-    dates, err := jeu.fetchData(datesURL)
+func retApi(form string) int {
+    res := GetApi("https://groupietrackers.herokuapp.com/api/artists")
+    var artists []struct {
+        Id      int      `json:"id"`
+        Name    string   `json:"name"`
+        Members []string `json:"members"`
+    }
+    json.Unmarshal(res, &artists)
+    for _, val := range artists {
+        if form == val.Name {
+            return val.Id
+        }
+        for a := 0; a < len(val.Members); a++ {
+            if form == val.Members[a] {
+                return val.Id
+            }
+        }
+    }
+    return 0
+}
+
+type Artist struct {
+    Id           int      `json:"id"`
+    Image        string   `json:"image"`
+    Name         string   `json:"name"`
+    Members      []string `json:"members"`
+    CreationDate int      `json:"creationDate"`
+    FirstAlbum   string   `json:"firstAlbum"`
+    Locations    string   `json:"locations"`
+    ConcertDates string   `json:"concertDates"`
+    Relations    string   `json:"relations"`
+}
+
+func GetArtists() ([]Artist, error) {
+    url := "https://groupietrackers.herokuapp.com/api/artists"
+    body := GetApi(url)
+
+    var artists []Artist
+    err := json.Unmarshal(body, &artists)
     if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching dates: %v", err)})
-        return
+        return nil, err
     }
 
-    relation, err := jeu.fetchData(relationURL)
-    if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error fetching relation: %v", err)})
-        return
-    }
-
-    response := Engine{
-        Artists:   artists,
-        Locations: locations,
-        Dates:     dates,
-        Relation:  relation,
-    }
-
-    c.JSON(http.StatusOK, response)
+    return artists, nil
 }
