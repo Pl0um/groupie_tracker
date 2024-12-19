@@ -16,6 +16,13 @@
                 data.forEach(artist => {
                     const artistElement = document.createElement('div');
                     artistElement.textContent = artist.name;
+                    artistElement.innerHTML = `
+                        <h2>${artist.name}</h2>
+                        <img src="${artist.image}" alt="${artist.name}" width="200">
+                        <p>Members: ${artist.members.join(', ')}</p>
+                        <p>Creation Date: ${artist.creationDate}</p>
+                        <p>First Album: ${artist.firstAlbum}</p>
+                    `;
                     artistsDiv.appendChild(artistElement);
                 });
             })

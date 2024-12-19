@@ -12,9 +12,15 @@ func Run(base *Engine) {
     http.HandleFunc("/Groupie", base.groupieHandler)
     http.HandleFunc("/Credit", base.creditHandler)
 
+    http.HandleFunc("/api/artists", func(w http.ResponseWriter, r *http.Request) {
+        res := GetApi("https://groupietrackers.herokuapp.com/api/artists")
+        w.Header().Set("Content-Type", "application/json")
+        w.Write(res)
+    })
+
 	css := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", css))
-    
+
     fmt.Println("Le serveur c'est lancer ici : http://localhost:2025") // J'affiche un message pour dire que le serveur c'est lancer
     if err := http.ListenAndServe(":2025", nil); err != nil { // Je lance le serveur sur le port 2025
         fmt.Println("Désoler le serveur ne c'est pas lancer :", err) // Si il y a une erreur je l'affiche
