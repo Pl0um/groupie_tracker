@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-    var jeu e.Engine
-    e.Run(&jeu)
+    var base e.Engine
+    e.Run(&base)
 }

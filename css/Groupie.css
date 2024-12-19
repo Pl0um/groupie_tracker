@@ -8,6 +8,8 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 20px;
+    flex-direction: column;
+    columns: 2;
 }
 
 h1 {
@@ -15,4 +17,17 @@ h1 {
     font-weight: bold;
     color: #000000;
     text-align: center;
+}
+
+#artists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.artist {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
