@@ -9,8 +9,8 @@ func Run(base *Engine) {
     // Je définis plusieur routes
     http.HandleFunc("/", base.Handler) // Une fois lancer on arrive sur la racine ou on appelle la fonction Handler
     http.HandleFunc("/Home", base.Home)
-    http.HandleFunc("/Groupie", base.groupieHandler)
-    http.HandleFunc("/Credit", base.creditHandler)
+    http.HandleFunc("/Groupie", base.Groupie)
+    http.HandleFunc("/Credit", base.Credit)
 
     http.HandleFunc("/api/artists", func(w http.ResponseWriter, r *http.Request) {
         res := GetApi("https://groupietrackers.herokuapp.com/api/artists")

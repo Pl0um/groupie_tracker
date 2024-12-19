@@ -1,13 +1,12 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #d11818;
-    color: #E0E0E0;
+    font-family: 'Arial', sans-serif;
+    background: #ffffff url('/css/image/fond2.png') center center/cover no-repeat;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
+    height: 100vh;
+    flex-direction: column;
 }
 
 h1 {
@@ -25,7 +24,7 @@ h1 {
     border: none;
     border-radius: 8px;
     background-color: #3A506B;
-    color: #E0E0E0;
+    color: #ffffff;
     cursor: pointer;
     margin: 10px 0;
     transition: background-color 0.3s ease, transform 0.2s;

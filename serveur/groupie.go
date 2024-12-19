@@ -1,14 +1,25 @@
 package engine
 
 import (
-	"html/template"
-	"net/http"
+    "html/template"
+    "net/http"
+    "path/filepath"
 )
 
-func (base *Engine) groupieHandler(w http.ResponseWriter, r *http.Request) {
-    // J'utilise la librairie tmpl pour créer un template qui va chercher mon fichier Groupie.html
-	tmpl := template.Must(template.ParseFiles("template/Groupie.html"))
+func (base *Engine) Groupie(w http.ResponseWriter, r *http.Request) {
+    // Définir le chemin complet vers le fichier Groupie.html
+    tmplPath := filepath.Join("template", "Groupie.html")
 
-    // J'exectute le template avec les données
-	tmpl.Execute(w, nil)
+    // Utiliser la bibliothèque template pour créer un modèle qui recherche mon fichier Groupie.html
+    tmpl, err := template.ParseFiles(tmplPath)
+    if err != nil {
+        http.Error(w, "Erreur lors du chargement du modèle", http.StatusInternalServerError)
+        return
+    }
+
+    // Exécuter le modèle avec des données
+    err = tmpl.Execute(w, nil)
+    if err != nil {
+        http.Error(w, "Erreur lors de l'exécution du modèle", http.StatusInternalServerError)
+    }
 }

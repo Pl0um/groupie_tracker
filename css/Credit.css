@@ -1,0 +1,17 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #2b1515 url('/css/image/fond2.png') center center/cover no-repeat;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+}
