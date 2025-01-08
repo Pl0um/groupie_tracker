@@ -17,7 +17,6 @@ func Run(base *Engine) {
         w.Header().Set("Content-Type", "application/json")
         w.Write(res)
     })
-
 	css := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", css))
 

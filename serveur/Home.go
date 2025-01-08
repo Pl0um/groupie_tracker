@@ -23,6 +23,8 @@ func (base *Engine) Home(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/Groupie", http.StatusFound)
 		} else if buttonValue == "credit" {
 				http.Redirect(w, r, "/Credit", http.StatusFound)
+		} else if buttonValue == "location" {
+			http.Redirect(w, r, "/Locations", http.StatusFound)
 		}
 	}
 }

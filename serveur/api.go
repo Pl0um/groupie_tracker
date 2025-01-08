@@ -2,18 +2,20 @@ package engine
 
 import (
     "io/ioutil"
-    "net/http"    
+    "log"
+    "net/http"
 )
 
 func GetApi(url string) []byte {
-    resp, err := http.Get(url)
+    response, err := http.Get(url)
     if err != nil {
-        panic(err)
+        log.Fatal(err)
     }
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
+    defer response.Body.Close()
+
+    responseData, err := ioutil.ReadAll(response.Body)
     if err != nil {
-        panic(err)
+        log.Fatal(err)
     }
-    return body
+    return responseData
 }
