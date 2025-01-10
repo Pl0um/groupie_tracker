@@ -1,13 +1,10 @@
 package main
 
 import (
-	e "engine/serveur"
-	"net/http"
+    e "engine/serveur"
 )
 
 func main() {
-	css := http.FileServer(http.Dir("css"))
-	http.Handle("/css/", http.StripPrefix("/css/", css))
-	var jeu e.Engine
-	e.Run(&jeu)
+    var base e.Engine
+    e.Run(&base)
 }
