@@ -8,7 +8,7 @@ import (
 
 func (base *Engine) Groupie(w http.ResponseWriter, r *http.Request) {
 	// Définir le chemin complet vers le fichier Groupie.html
-	tmplPath := filepath.Join("template", "Groupie.html")
+	tmplPath := filepath.Join("template", "groupie.html")
 
 	// Utiliser la bibliothèque template pour créer un modèle qui recherche mon fichier Groupie.html
 	tmpl, err := template.ParseFiles(tmplPath)
