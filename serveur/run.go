@@ -11,9 +11,15 @@ func Run(base *Engine) {
     http.HandleFunc("/Home", base.Home)
     http.HandleFunc("/Groupie", base.Groupie)
     http.HandleFunc("/Credit", base.Credit)
+    http.HandleFunc("/Locations", base.Location)
 
     http.HandleFunc("/api/artists", func(w http.ResponseWriter, r *http.Request) {
         res := GetApi("https://groupietrackers.herokuapp.com/api/artists")
+        w.Header().Set("Content-Type", "application/json")
+        w.Write(res)
+    })
+    http.HandleFunc("/api/locations", func(w http.ResponseWriter, r *http.Request) {
+        res := GetApi("https://groupietrackers.herokuapp.com/api/locations")
         w.Header().Set("Content-Type", "application/json")
         w.Write(res)
     })

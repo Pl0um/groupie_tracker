@@ -9,7 +9,7 @@
     <h1>Locations</h1>
     <div id="locations"></div>
     <script>
-        fetch('https://groupietrackers.herokuapp.com/api/locations')
+        fetch('/api/locations')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -17,18 +17,23 @@
                 return response.json();
             })
             .then(data => {
-                console.log('Données reçues:', data); // Log des données reçues
-                const locationsDiv = document.getElementById('locations');
-                data.forEach(location => {
-                    const locationElement = document.createElement('div');
-                    locationElement.innerHTML = `
-                        <h2>${location.name}</h2>
-                        <p>${location.details}</p>
-                    `;
-                    locationsDiv.appendChild(locationElement);
-                });
-            })
-            .catch(error => console.error('Erreur lors de la récupération des locations:', error));
+                fetch(proxyUrl + encodeURIComponent(parsedData.locations))
+                    .then(response => response.json())
+                    .then(locationsData => {
+                        const locations = JSON.parse(locationsData.contents);
+                        const artistLocations = locations.index[artist.id];
+                                if (artistLocations && typeof artistLocations === 'object') {
+                                    const locationsList = document.createElement('ul');
+                                    for (const [city, dates] of Object.entries(artistLocations)) {
+                                        const locationItem = document.createElement('li');
+                                        locationItem.textContent = `${city}: ${Array.isArray(dates) ? dates.join(', ') : dates}`;
+                                        locationsList.appendChild(locationItem);
+                                    }
+                                     li.appendChild(locationsList);
+                                }
+                    })
+                    .catch(() => {});
+            }
     </script>
 </body>
 </html>
