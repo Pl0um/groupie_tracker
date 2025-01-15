@@ -2,25 +2,41 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/Home.css" >
+    <link rel="stylesheet" type="text/css" href="/css/Home.css">
     <title>Groupie Trackers</title>
 </head>
 <body>
-    <div>
-        <h1>Bienvenue !</h1>
-        <form method="post" action="/Groupie">
-            <button class="button" value="groupie">ça va groupie tracker !</button>
-        </form>
-        <form method="post" action="/Credit">
-            <button class="button" value="credit">crédit</button>
-        </form>
-        <form method="post" action="/Locations">
-            <button class="button" value="location">Locations</button>
-        </form>
-    
-    </div>
-    <footer>
-        <p>2024 - Ynov corporation<sup>&copy;</sup> </p>
-    </footer>
+    <h1>Groupie Tracker</h1>
+    <input search="search" placeholder="Rechercher un artiste">
+    <div id="artists" class="artists-grid"></div>
+    <script>
+        fetch('/api/artists')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Données reçues:', data); // Log des données reçues
+                if (!Array.isArray(data)) {
+                    throw new Error('Les données reçues ne sont pas un tableau');
+                }
+                const artistsDiv = document.getElementById('artists');
+                data.forEach(artist => {
+                    const artistElement = document.createElement('div');
+                    artistElement.classList.add('artist-card');
+                    artistElement.innerHTML = `
+                        <h2>${artist.name}</h2>
+                        <a href="/Groupie.html?id=${artist.id}">
+                            <img src="${artist.image}" alt="${artist.name}" width="200">
+                        </a>
+                    `;
+                    artistsDiv.appendChild(artistElement);
+                });
+            })
+            .catch(error => console.error('Error fetching artists:', error));
+    </script>
 </body>
 </html>
+<p>2024 - Ynov campus Montpellier<sup>&copy;</sup> </p>

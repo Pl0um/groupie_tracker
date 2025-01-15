@@ -3,30 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/Groupie.css">
-    <title>Groupie Trackers</title>
+    <title>Artiste</title>
 </head>
 <body>
-    <h1>Groupie Tracker</h1>
-    <div id="artists"></div>
+    <h1>Informations sur l'artiste</h1>
+    <div id="artist"></div>
     <script>
-        fetch('/api/artists')
-            .then(response => response.json())
-            .then(data => {
-                const artistsDiv = document.getElementById('artists');
-                data.forEach(artist => {
-                    const artistElement = document.createElement('div');
-                    artistElement.textContent = artist.name;
-                    artistElement.innerHTML = `
-                        <h2>${artist.name}</h2>
-                        <img src="${artist.image}" alt="${artist.name}" width="200">
-                        <p>Membres : ${artist.members.join(', ')}</p>
-                        <p>Dates de création : ${artist.creationDate}</p>
-                        <p>Premier album : ${artist.firstAlbum}</p>
-                    `;
-                    artistsDiv.appendChild(artistElement);
-                });
+        // Récupérer l'ID de l'artiste à partir de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const artistId = urlParams.get('id');
+
+        // Vérifiez que l'ID de l'artiste est bien récupéré
+        console.log('ID de l\'artiste:', artistId);
+
+        // Récupérer les informations de l'artiste depuis l'API
+        fetch(`/api/artists/${artistId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // Changez response.json() en response.text() pour voir la réponse brute
             })
-            .catch(error => console.error('Error fetching artists:', error));
+            .then(text => {
+                console.log('Réponse brute de l\'API:', text); // Log de la réponse brute
+                const artist = JSON.parse(text); // Parsez manuellement la réponse en JSON
+                console.log('Données de l\'artiste:', artist); // Log des données de l'artiste
+                const artistDiv = document.getElementById('artist');
+                artistDiv.innerHTML = `
+                    <h2>${artist.name}</h2>
+                    <img src="${artist.image}" alt="${artist.name}" width="200">
+                    <p>Membres : ${artist.members.join(', ')}</p>
+                    <p>Dates de création : ${artist.creationDate}</p>
+                    <p>Premier album : ${artist.firstAlbum}</p>
+                `;
+            })
+            .catch(error => console.error('Error fetching artist:', error));
     </script>
 </body>
 </html>
