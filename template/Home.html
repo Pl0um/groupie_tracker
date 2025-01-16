@@ -10,7 +10,7 @@
     <input search="search" placeholder="Rechercher un artiste">
     <div id="artists" class="artists-grid"></div>
     <script>
-        fetch('/api/artists')
+        fetch('/api/artists/')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

@@ -22,11 +22,9 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.text(); // Changez response.json() en response.text() pour voir la réponse brute
+                return response.json();
             })
-            .then(text => {
-                console.log('Réponse brute de l\'API:', text); // Log de la réponse brute
-                const artist = JSON.parse(text); // Parsez manuellement la réponse en JSON
+            .then(artist => {
                 console.log('Données de l\'artiste:', artist); // Log des données de l'artiste
                 const artistDiv = document.getElementById('artist');
                 artistDiv.innerHTML = `
