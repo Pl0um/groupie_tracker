@@ -13,8 +13,9 @@
         <div class="artist-card">
             <h2>{{.Name}}</h2>
             <form action="/Groupie" method="get">
-                <button name="id" id="artists-button" value="{{.Id}}" type="submit">Voir</button>
-                <img src="{{.Image}}" alt="Artist Image">
+                <button name="id" id="artists-button" value="{{.Id}}" type="submit">
+                    <img src="{{.Image}}" alt="Artist Image">
+                </button>
             </form>
         </div>
         {{ end }}
