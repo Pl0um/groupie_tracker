@@ -3,15 +3,58 @@ package engine
 import (
 	"html/template"
 	"net/http"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
+	"strconv"
+	
 )
 
-func (base *Engine) Handler(w http.ResponseWriter, r *http.Request) {
-	// J'utilise la librairie tmpl pour créer un template qui va chercher mon fichier Home.html
-	tmpl := template.Must(template.ParseFiles("template/Home.html"))
-	
-	// Je crée une structure de données pour les données du template
-	data := Engine{}
+func (base *Engine) Home(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./template/Home.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+	if err != nil {
+        fmt.Print(err.Error())
+        os.Exit(1)
+    }
 
-	// J'execute le template avec les données
-	tmpl.Execute(w, data)
+
+    responseData, err := ioutil.ReadAll(response.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+	var GroupList list
+	json.Unmarshal(responseData, &GroupList.Lists)
+	t.Execute(w,GroupList)
+}
+
+func Groupie(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./template/Groupie.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+	if err != nil {
+        fmt.Print(err.Error())
+        os.Exit(1)
+    }
+
+
+    responseData, err := ioutil.ReadAll(response.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+	var GroupList []Engine
+	json.Unmarshal(responseData, &GroupList)
+
+	id, _ := strconv.Atoi(r.FormValue("id"))
+	t.Execute(w,GroupList[id-1])
 }

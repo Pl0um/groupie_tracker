@@ -3,26 +3,16 @@ package engine
 import (
     "fmt"
     "net/http"
-    "strings"
 )
 
 func Run(base *Engine) {
     // Je définis plusieurs routes
-    http.HandleFunc("/", base.Handler) // Une fois lancé, on arrive sur la racine où on appelle la fonction Handler
-    http.HandleFunc("/Home", func(w http.ResponseWriter, r *http.Request) {
-        http.ServeFile(w, r, "template/Home.html")
-    })
-    http.HandleFunc("/Groupie", func(w http.ResponseWriter, r *http.Request) {
-        http.ServeFile(w, r, "template/Groupie.html")
-    })
+    http.HandleFunc("/", base.Home) // Une fois lancé, on arrive sur la racine où on appelle la fonction Handler
+    http.HandleFunc("/Groupie", Groupie)
 
-    http.HandleFunc("/api/artists/", func(w http.ResponseWriter, r *http.Request) {
-        id := strings.TrimPrefix(r.URL.Path, "/api/artists/")
-        res := GetApi("https://groupietrackers.herokuapp.com/api/artists" + id)
-        w.Header().Set("Content-Type", "application/json")
-        w.Write(res)
-    })
-    
+    fs := http.FileServer(http.Dir("template/"))
+	http.Handle("/serv/", http.StripPrefix("/template/", fs))
+
     // Servir les fichiers CSS
     css := http.FileServer(http.Dir("css"))
     http.Handle("/css/", http.StripPrefix("/css/", css))
