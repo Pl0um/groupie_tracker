@@ -5,14 +5,19 @@
     <link rel="stylesheet" type="text/css" href="/css/Groupie.css">
     <title>Artiste</title>
 </head>
-    <h1>Informations sur l'artiste</h1>
+    <header>
+        <form action="/Home" method="get">
+            <button name="back" id="back">Back</button>
+        </form>
+        <h1>Informations sur l'artiste</h1></header>
+    
     <body>
         <div class = "grille">
-            <h1>{{.Name}}</h1>
-            <h1>{{.Members}}</h1>
-            <h1>{{.CreationDate}}</h1>
-            <h1>{{.FirstAlbum}}</h1>
-            <h1>{{.Locations}}</h1>
+            <h1><span class="highlight">• Nom : </span>{{.Name}}</h1>
+            <h1><span class="highlight">• Membres : </span>{{.Members}}</h1>
+            <h1><span class="highlight">• Date de créations : </span>{{.CreationDate}}</h1>
+            <h1><span class="highlight">• Premier album : </span>{{.FirstAlbum}}</h1>
+            <h1><span class="highlight">• Locations : </span>{{.Locations}}</h1>
         </div>
         <img src="{{.Image}}">
     </body>
