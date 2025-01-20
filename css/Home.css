@@ -29,7 +29,7 @@ input {
 
 .artists-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Deux colonnes */
+    grid-template-columns: 1fr 1fr 1fr; /* Deux colonnes */
     gap: 20px; /* Espace entre les colonnes */
     width: 80%; /* Largeur de la grille */
     margin: 20px auto; /* Centrer la grille */
@@ -37,8 +37,27 @@ input {
 
 .artist-card {
     background-color: #fff;
-    color: #000;
+    color: #000000;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
+}
+
+.artist-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.artist-card button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.artist-card button:hover {
+    background-color: #41414128;
 }
