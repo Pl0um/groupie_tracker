@@ -1,36 +1,44 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: #ffffff url('/css/image/fond2.png') center center/cover no-repeat;
+    background: #000000;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     flex-direction: column;
+    margin: 0;
 }
 
 h1 {
     font-size: 2.5vw;
     font-weight: bold;
-    color: #000000;
+    color: #ffffff;
     text-align: center;
 }
 
-.button {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.8vw;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    background-color: #c58fcc;
-    color: #ffffff;
-    cursor: pointer;
+input {
+    align-items: flex;
+    width: 50%;
+    padding: 10px;
     margin: 10px 0;
-    transition: background-color 0.3s ease, transform 0.2s;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
 }
 
-.button:hover {
-    background-color: #1f7eaa;
-    transform: scale(1.05);
+.artists-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes */
+    gap: 20px; /* Espace entre les colonnes */
+    width: 80%; /* Largeur de la grille */
+    margin: 20px auto; /* Centrer la grille */
+}
+
+.artist-card {
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
 }
