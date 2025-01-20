@@ -18,16 +18,3 @@ h1 {
     color: #000000;
     text-align: center;
 }
-
-#artists {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.artist {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}

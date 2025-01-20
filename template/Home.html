@@ -2,20 +2,25 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/Home.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/Home.css" >
     <title>Groupie Trackers</title>
 </head>
 <body>
-    <h1>Bienvenue !</h1>
-    <div class=bouton_>
-        <form action="/groupie" class="bouton_home">
-        <button class="bouton_home" id="groupie" type="submit" value="groupie" name="bouton_home">ça va groupie_tracker</button>
-    </form>
+    <div>
+        <h1>Bienvenue !</h1>
+        <form method="post" action="/Groupie">
+            <button class="button" value="groupie">ça va groupie tracker !</button>
+        </form>
+        <form method="post" action="/Credit">
+            <button class="button" value="credit">crédit</button>
+        </form>
+        <form method="post" action="/Locations">
+            <button class="button" value="location">Locations</button>
+        </form>
+    
     </div>
-    <div class=bouton2_>
-        <form action="/credit" class="credit">
-        <button class="credit" id="Credit" type="submit" value="Credit" name="credit">credit</button>
-    </form>
-    </div>
+    <footer>
+        <p>2024 - Ynov corporation<sup>&copy;</sup> </p>
+    </footer>
 </body>
-</html> 
+</html>
