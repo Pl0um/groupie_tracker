@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1>Groupie Tracker</h1>
-    <input search="search" placeholder="Rechercher un artiste">
-    <div class="artists-grid">
+    <input id="search" type="text" placeholder="Rechercher un artiste">
+    <div class="artists-grid" id="artists-grid">
         {{ range .Lists }}
-        <div class="artist-card">
+        <div class="artist-card" data-name="{{.Name}}">
             <h2>{{.Name}}</h2>
             <form action="/Groupie" method="get">
                 <button name="id" id="artists-button" value="{{.Id}}" type="submit">
@@ -21,5 +21,6 @@
         {{ end }}
     </div>
     <p>2024 - Ynov campus Montpellier<sup>&copy;</sup> </p>
+    <script src="/js/search.js"></script>
 </body>
 </html>
