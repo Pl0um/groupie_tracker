@@ -42,3 +42,22 @@ input {
     border-radius: 8px;
     text-align: center;
 }
+
+.artist-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.artist-card button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.artist-card button:hover {
+    background-color: #0056b3;
+}
