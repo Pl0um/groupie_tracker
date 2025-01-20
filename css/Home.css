@@ -61,3 +61,18 @@ input {
 .artist-card button:hover {
     background-color: #41414128;
 }
+
+button#back {
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+}
+
+button#back:hover {
+    color: #000000;
+}

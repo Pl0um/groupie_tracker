@@ -58,3 +58,12 @@ func Groupie(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.FormValue("id"))
 	t.Execute(w,GroupList[id-1])
 }
+
+func Credit(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./template/Credit.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	t.Execute(w,nil)
+}
