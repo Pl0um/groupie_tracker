@@ -33,7 +33,17 @@ func (base *Engine) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func Groupie(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("./template/Groupie.html")
+	funcMap := template.FuncMap{
+		"toJson": func(v interface{}) string {
+			a, _ := json.Marshal(v)
+			return string(a)
+		},
+		"safeJS": func(s string) template.JS {
+			return template.JS(s)
+		},
+	}
+
+	t, err := template.New("Groupie.html").Funcs(funcMap).ParseFiles("./template/Groupie.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -54,9 +64,4 @@ func Groupie(w http.ResponseWriter, r *http.Request) {
 
 	id, _ := strconv.Atoi(r.FormValue("id"))
 	t.Execute(w, GroupList[id-1])
-}
-
-func Credit(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("template/credit.html"))
-	tmpl.Execute(w, nil)
 }
