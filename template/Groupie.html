@@ -28,7 +28,9 @@
             {{ end }}
         </ul>
     </div>
-    <div id="map" style="height: 400px;"></div>
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         // Initialiser la carte
@@ -41,9 +43,9 @@
 
         // Ajouter les marqueurs pour les locations
         var locations = JSON.parse('{{.LocationsJSON}}');
-        if (locations.length === 0) {
+        if (locations && locations.length === 0) {
             document.querySelector('ul').innerHTML = '<li>Aucune location disponible</li>';
-        } else {
+        } else if (locations) {
             locations.forEach(function(location) {
                 var marker = L.marker([location.Lat, location.Lng]).addTo(map);
                 marker.bindPopup(location.Name).openPopup();
