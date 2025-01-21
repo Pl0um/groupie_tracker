@@ -3,22 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/Groupie.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <title>Artiste</title>
 </head>
+<body>
     <header>
         <form action="/Home" method="get">
             <button name="back" id="back">Back</button>
         </form>
-        <h1>Informations sur l'artiste</h1></header>
-    
-    <body>
-        <div class = "grille">
-            <h1><span class="highlight">• Nom : </span>{{.Name}}</h1>
-            <h1><span class="highlight">• Membres : </span>{{.Members}}</h1>
-            <h1><span class="highlight">• Date de créations : </span>{{.CreationDate}}</h1>
-            <h1><span class="highlight">• Premier album : </span>{{.FirstAlbum}}</h1>
-            <h1><span class="highlight">• Locations : </span>{{.Locations}}</h1>
-        </div>
-        <img src="{{.Image}}">
-    </body>
+        <h1>Informations sur l'artiste</h1>
+    </header>
+    <img src="{{.Image}}">
+    <div class="grille">
+        <h1><span class="highlight">• Nom : </span>{{.Name}}</h1>
+        <h1><span class="highlight">• Membres : </span>{{range .Members}}{{.}} {{end}}</h1>
+        <h1><span class="highlight">• Date de créations : </span>{{.CreationDate}}</h1>
+        <h1><span class="highlight">• Premier album : </span>{{.FirstAlbum}}</h1>
+        <h1><span class="highlight">• Locations : </span></h1>
+        <ul>
+            {{ range .Locations }}
+            <li>{{ .Name }} ({{ .Lat }}, {{ .Lng }})</li>
+            {{ else }}
+            <li>Aucune location disponible</li>
+            {{ end }}
+        </ul>
+    </div>
+    <div id="map" style="height: 400px;"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialiser la carte
+        var map = L.map('map').setView([51.505, -0.09], 2);
+
+        // Ajouter les tuiles OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Ajouter les marqueurs pour les locations
+        var locations = JSON.parse('{{.LocationsJSON}}');
+        if (locations.length === 0) {
+            document.querySelector('ul').innerHTML = '<li>Aucune location disponible</li>';
+        } else {
+            locations.forEach(function(location) {
+                var marker = L.marker([location.Lat, location.Lng]).addTo(map);
+                marker.bindPopup(location.Name).openPopup();
+            });
+        }
+    </script>
+</body>
 </html>
