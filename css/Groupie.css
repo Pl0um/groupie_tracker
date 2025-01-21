@@ -11,32 +11,26 @@ body {
 }
 
 .grille {
-    text-align: center;
+    text-align: left;
     margin: 20px 0;
     color: #ffffff;
 }
 
-#name {
-    font-size: 24px;
-    font-weight: bold;
+.highlight {
+    color: #00fff2;
 }
 
-#members {
-    font-size: 20px;
-    color: #ffcc00;
+button#back {
+    display: flex;
+    align-items: left;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
 }
 
-#creation-date {
-    font-size: 18px;
-    color: #00ccff;
-}
-
-#first-album {
-    font-size: 18px;
-    color: #ff66cc;
-}
-
-#locations {
-    font-size: 18px;
-    color: #66ff66;
+button#back:hover {
+    color: #000000;
 }
