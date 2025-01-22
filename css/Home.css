@@ -10,6 +10,31 @@ body {
     margin: 0;
 }
 
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#search {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+#filter-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+#filter-button:hover {
+    background-color: #0056b3;
+}
+
 h1 {
     font-size: 2.5vw;
     font-weight: bold;
@@ -29,7 +54,7 @@ input {
 
 .artists-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Deux colonnes */
+    grid-template-columns: 1fr 1fr 1fr; /* Trois colonnes */
     gap: 20px; /* Espace entre les colonnes */
     width: 80%; /* Largeur de la grille */
     margin: 20px auto; /* Centrer la grille */
@@ -52,12 +77,38 @@ input {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
-    background-color: #ffffff;
-    color: white;
+    background-color: #007bff00;
+    color: rgba(255, 255, 255, 0);
     border: none;
     cursor: pointer;
 }
 
 .artist-card button:hover {
-    background-color: #41414128;
+    background-color: #0057b300;
+}
+
+button#back {
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+}
+
+button#back:hover {
+    color: #000000;
+}
+
+button#buttonf {
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
 }

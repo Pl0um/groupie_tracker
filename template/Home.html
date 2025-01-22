@@ -7,22 +7,36 @@
 </head>
 <body>
     <header>        
-        <h1>Groupie Tracker</h1></header>
+        <h1>Groupie Tracker</h1>
+   
+    <input id="search" type="text" placeholder="Rechercher un artiste"/>
+    <button type="button" id="filter-button" onclick="toggleFilters()">Filtre</button>
+    <div id="filter-options" style="display: none;">
+        <button type="button" id="sort-button" onclick="toggleSortOrder()">
+            Trier par date de création <span id="sort-arrow">⬇️</span>
+        </button>
+        <button type="button" id="sort-alpha-button" onclick="toggleSortAlphaOrder()">
+            Trier par ordre alphabétique <span id="sort-alpha-arrow">⬇️</span>
+        </button>
     </header>
-    <input id="search" type="text" placeholder="Rechercher un artiste">
+    </div>
     <div class="artists-grid" id="artists-grid">
         {{ range .Lists }}
-        <div class="artist-card" data-name="{{.Name}}">
+        <div class="artist-card" data-name="{{.Name}}" data-creation-date="{{.CreationDate}}">
             <h2>{{.Name}}</h2>
             <form action="/Groupie" method="get">
                 <button name="id" id="artists-button" value="{{.Id}}" type="submit">
                     <img src="{{.Image}}" alt="Artist Image">
-                </button>
+                </button>        
             </form>
-        </div>
+        </div>            
         {{ end }}
     </div>
     <p>2024 - Ynov campus Montpellier<sup>&copy;</sup> </p>
+    <form action="/Credit" method="get">
+        <button name="credit" id="credit" type="submit">Qui nous sommes</button>
+    </form>
+    <p></p>
     <script src="/js/search.js"></script>
 </body>
 </html>

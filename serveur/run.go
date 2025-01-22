@@ -9,6 +9,7 @@ func Run(base *Engine) {
     // Je définis plusieurs routes
     http.HandleFunc("/", base.Home) // Une fois lancé, on arrive sur la racine où on appelle la fonction Handler
     http.HandleFunc("/Groupie", Groupie)
+    http.HandleFunc("/Credit", Credit)
 
     fs := http.FileServer(http.Dir("template/"))
     http.Handle("/serv/", http.StripPrefix("/template/", fs))
