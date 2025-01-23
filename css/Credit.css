@@ -1,3 +1,11 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+    background: #0b0b0b
+
+}
+
 h1 {
     background-color: #ffffff; 
     padding: 20px;
@@ -8,31 +16,32 @@ h1 {
     text-align: center;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #000000;
+a {
+    color: #ffffff;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 p {
-    color: #ffffff;
-    text-align: center;
-    margin: 10px;
-    font-size: 18px;
-    line-height: 1.5;
-    letter-spacing: 1px;
+    display: inline-block;
+    font-size: 1.5vw;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    text-align: left;
+    line-height: 50px;
 }
 
 button#back {
-    display: flex;
-    align-items: left;
-    margin: 10px auto;
     padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    border: none;
     cursor: pointer;
 }
 
@@ -41,7 +50,7 @@ button#back:hover {
 }
 
 .ici {   
-    color: #000000;
+    color: #0b0b0b;
     text-align: center;
     margin: 10px;
     font-size: 24px;

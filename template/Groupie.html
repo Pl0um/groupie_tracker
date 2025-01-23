@@ -9,9 +9,9 @@
 <body>
     <header>
         <form action="/Home" method="get">
-            <button name="back" id="back">Back</button>
+            <button name="back" id="back">Retour</button>
         </form>
-        <h1>Informations sur l'artiste</h1>
+        <h2>Informations sur l'artiste</h2>
     </header>
     <img src="{{.Image}}">
     <div class="grille">
@@ -19,12 +19,12 @@
         <h1><span class="highlight">• Membres : </span>{{range .Members}}{{.}} {{end}}</h1>
         <h1><span class="highlight">• Date de créations : </span>{{.CreationDate}}</h1>
         <h1><span class="highlight">• Premier album : </span>{{.FirstAlbum}}</h1>
-        <h1><span class="highlight">• Locations : </span></h1>
+        <h1><span class="highlight">• Localisations : </span></h1>
         <ul>
             {{ range .Locations }}
             <li>{{ .Name }} ({{ .Lat }}, {{ .Lng }})</li>
             {{ else }}
-            <li>Aucune location disponible</li>
+            <li>Aucune Localisations disponible</li>
             {{ end }}
         </ul>
     </div>

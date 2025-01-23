@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: #000000;
+    background: #0b0b0b;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -52,10 +52,10 @@ input {
     text-align: center;
 }
 
-.artists-grid {
+#artists-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr; /* Trois colonnes */
-    gap: 20px; /* Espace entre les colonnes */
+    gap: 40px; /* Espace entre les colonnes */
     width: 80%; /* Largeur de la grille */
     margin: 20px auto; /* Centrer la grille */
 }
@@ -66,18 +66,24 @@ input {
     padding: 10px;
     border-radius: 8px;
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
+.artist-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 14px 18px rgba(255, 255, 255, 0.226);}
+
 .artist-card img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    object-fit: cover;
 }
 
 .artist-card button {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
-    background-color: #007bff00;
+    background-color: #30629700;
     color: rgba(255, 255, 255, 0);
     border: none;
     cursor: pointer;
@@ -87,28 +93,11 @@ input {
     background-color: #0057b300;
 }
 
-button#back {
-    display: flex;
-    align-items: center;
-    margin: 10px auto;
+button#credit {
     padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    border: none;
-    cursor: pointer;
-}
-
-button#back:hover {
-    color: #000000;
-}
-
-button#buttonf {
-    display: flex;
-    align-items: center;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: rgb(255, 255, 255);
-    border: none;
     cursor: pointer;
 }

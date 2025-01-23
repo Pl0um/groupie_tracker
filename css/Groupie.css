@@ -1,12 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #282c34;
+    background-color: #0b0b0b;
     color: #ffffff;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 1.5vw;
 }
 
 header {
@@ -24,17 +25,16 @@ header {
 }
 
 .highlight {
-    color: #00fff2;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 button#back {
-    display: flex;
-    align-items: left;
-    margin: 10px auto;
     padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    border: none;
     cursor: pointer;
 }
 
@@ -51,4 +51,19 @@ button#back:hover {
 #map {
     width: 100%;
     height: 400px;
+}
+
+h1 {
+    font-size: 1.5vw;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: left;
+}
+
+h2 {
+    justify-items: center;
+    font-size: 2vw;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
 }
