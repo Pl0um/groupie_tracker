@@ -11,14 +11,15 @@ func Run(base *Engine) {
     http.HandleFunc("/Groupie", Groupie)
     http.HandleFunc("/Credit", Credit)
 
+    // Fournir les fichiers template
     fs := http.FileServer(http.Dir("template/"))
     http.Handle("/serv/", http.StripPrefix("/template/", fs))
 
-    // Servir les fichiers CSS
+    // Fournir les fichiers CSS
     css := http.FileServer(http.Dir("css"))
     http.Handle("/css/", http.StripPrefix("/css/", css))
 
-    // Servir les fichiers JavaScript
+    // Fournir les fichiers JS
     js := http.FileServer(http.Dir("js"))
     http.Handle("/js/", http.StripPrefix("/js/", js))
 
