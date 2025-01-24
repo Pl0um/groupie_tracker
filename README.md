@@ -64,11 +64,3 @@ Groupie Tracker est une application web qui permet de suivre les informations su
 ## Exemple de données
 
 Les données des artistes sont récupérées depuis l'API `https://groupietrackers.herokuapp.com/api/artists`.
-
-## Contribution
-
-Les contributions sont les bienvenues ! Si vous souhaitez contribuer, veuillez ouvrir une issue ou soumettre une pull request.
-
-## Licence
-
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
