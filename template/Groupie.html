@@ -19,12 +19,12 @@
         <h1><span class="highlight">• Membres : </span>{{range .Members}}{{.}} {{end}}</h1>
         <h1><span class="highlight">• Date de créations : </span>{{.CreationDate}}</h1>
         <h1><span class="highlight">• Premier album : </span>{{.FirstAlbum}}</h1>
-        <h1><span class="highlight">• Localisations : </span></h1>
+        <h1><span class="highlight">• Localisation : </span></h1>
         <ul>
             {{ range .Locations }}
             <li>{{ .Name }} ({{ .Lat }}, {{ .Lng }})</li>
             {{ else }}
-            <li>Aucune Localisations disponible</li>
+            <li>Aucune Localisation disponible</li>
             {{ end }}
         </ul>
     </div>
